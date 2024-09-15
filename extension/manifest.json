@@ -3,13 +3,8 @@
   "name": "GitHub Account Switcher",
   "version": "1.0",
   "description": "Automatically picks the correct account when accessing a GitHub repository.",
-  "permissions": [
-    "tabs",
-    "https://github.com/*"
-  ],
-  "host_permissions": [
-    "https://github.com/*"
-  ],
+  "permissions": ["tabs"],
+  "host_permissions": ["https://github.com/*"],
   "background": {
     "service_worker": "background.js"
   },
