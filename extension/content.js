@@ -3,15 +3,26 @@
     return document.querySelector('.Header-link .dropdown-menu');
   };
 
+  const isGitHubEnterprise = () => {
+    return window.location.hostname !== 'github.com';
+  };
+
   const selectCorrectAccount = () => {
     try {
       const accountPicker = detectAccountPicker();
       if (accountPicker) {
         const accounts = accountPicker.querySelectorAll('a');
         for (let i = 0; i < accounts.length; i++) {
-          if (accounts[i].dataset.accountId === config.correctAccountId) {
-            accounts[i].click();
-            break;
+          if (isGitHubEnterprise()) {
+            if (accounts[i].dataset.accountId === config.enterpriseAccountId) {
+              accounts[i].click();
+              break;
+            }
+          } else {
+            if (accounts[i].dataset.accountId === config.privateAccountId) {
+              accounts[i].click();
+              break;
+            }
           }
         }
       }
