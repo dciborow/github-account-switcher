@@ -1,42 +1,27 @@
 name: "Formatting Check"
 
+name: reviewdog
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
 jobs:
-  formatting-check:
+  prettier:
+    name: runner / prettier
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Run Prettier
-      run: npx prettier --check .
-
-    - name: Run Prettier to fix formatting issues
-      if: failure()
-      run: npx prettier --write .
-
-    - name: Comment on pull request with fixed formatting
-      if: failure()
-      uses: actions/github-script@v3
-      with:
-        script: |
-          const { execSync } = require('child_process');
-          const output = execSync('npx prettier --write .', { encoding: 'utf-8' });
-          const comment = `### Prettier Formatting Fixes\n\`\`\`\n${output}\n\`\`\``;
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: comment
-          });
+      - uses: actions/checkout@v2
+      - uses: EPMatt/reviewdog-action-prettier@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          # Change reviewdog reporter if you need
+          # [github-pr-check,github-check,github-pr-review].
+          # More about reviewdog reporters at
+          # https://github.com/reviewdog/reviewdog#reporters
+          reporter: github-pr-review
+          # Change reporter level if you need
+          # [info,warning,error].
+          # More about reviewdog reporter level at
+          # https://github.com/reviewdog/reviewdog#reporters
+          level: warning
