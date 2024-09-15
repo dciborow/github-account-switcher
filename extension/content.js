@@ -1,8 +1,8 @@
-function detectAccountPicker() {
+const detectAccountPicker = () => {
   return document.querySelector('.Header-link .dropdown-menu');
-}
+};
 
-function selectCorrectAccount() {
+const selectCorrectAccount = () => {
   try {
     const accountPicker = detectAccountPicker();
     if (accountPicker) {
@@ -17,7 +17,7 @@ function selectCorrectAccount() {
   } catch (error) {
     console.error('Error selecting the correct account:', error);
   }
-}
+};
 
 const debounceAccountSelector = (func, delay) => {
   let timeoutId;

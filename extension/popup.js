@@ -1,5 +1,5 @@
 document.getElementById('switchAccountButton').addEventListener('click', () => {
-  function selectCorrectAccount() {
+  const selectCorrectAccount = () => {
     try {
       const accountPicker = document.querySelector('.Header-link .dropdown-menu');
       if (accountPicker) {
