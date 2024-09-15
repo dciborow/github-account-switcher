@@ -1,34 +1,23 @@
 name: "Formatting Check"
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+name: reviewdog
+on: [pull_request]
 jobs:
-  formatting-check:
+  prettier:
+    name: runner / prettier
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Run Prettier
-      run: npx prettier --check .
-
-    - name: Run Prettier to fix formatting issues
-      if: failure()
-      run: npx prettier --write .
-
-    - name: Comment on pull request with fixed formatting
-      if: failure()
-      uses: reviewdog/action-suggester@v1
-      with:
-        tool_name: prettier
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: EPMatt/reviewdog-action-prettier@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          # Change reviewdog reporter if you need
+          # [github-pr-check,github-check,github-pr-review].
+          # More about reviewdog reporters at
+          # https://github.com/reviewdog/reviewdog#reporters
+          reporter: github-pr-review
+          # Change reporter level if you need
+          # [info,warning,error].
+          # More about reviewdog reporter level at
+          # https://github.com/reviewdog/reviewdog#reporters
+          level: warning
