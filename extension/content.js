@@ -19,6 +19,13 @@ function selectCorrectAccount() {
   }
 }
 
+function handleRepositoryTransition() {
+  const currentUrl = window.location.href;
+  if (isEnterpriseUrl(currentUrl) || isPrivateGithubUrl(currentUrl)) {
+    selectCorrectAccount();
+  }
+}
+
 const debounce = (func, delay) => {
   let timeoutId;
   return (...args) => {
@@ -46,4 +53,5 @@ if (headerElement) {
 
 window.addEventListener('load', () => {
   debouncedSelectCorrectAccount();
+  handleRepositoryTransition();
 });
