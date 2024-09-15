@@ -22,7 +22,7 @@ within the file for "TODO".
   -  https://aka.ms/StartRight/README-Template/Instructions
 
 ======================================================================================
-====================================================================================-->
+===================================================================================-->
 
 
 <!---------------------[  Description  ]------------------<recommended> section below------------------>
@@ -167,7 +167,6 @@ How to Evaluate & Examples:
 <!-- We use [SemVer](https://aka.ms/StartRight/README-Template/semver) for versioning. -->
 <!------====-- CONTENT GOES ABOVE ------->
 
-
 -----------------------------------------------
 
 <!-----------------------[  Access  ]-----------------------<recommended> section below------------------>
@@ -235,10 +234,10 @@ How to Evaluate & Examples:
 
 
 <!-----------------------[  Support & Reuse Expectations  ]-----<recommended> section below-------------->
- 
+
 ### Support & Reuse Expectations
 
- 
+
 <!-- 
 INSTRUCTIONS:
 - To avoid misalignments use this section to set expectations in regards to current and future state of:
@@ -256,7 +255,6 @@ _The creators of this repository **DO NOT EXPECT REUSE**._
 If you do use it, please let us know via an email or 
 leave a note in an issue, so we can best understand the value of this repository.
 <!------====-- CONTENT GOES ABOVE ------->
-
 
 <!-----------------------[  Limitations  ]----------------------<optional> section below----------------->
 
@@ -308,3 +306,18 @@ This README started as a template provided as part of the
 [README template](https://aka.ms/StartRight/README-Template) used in this repository is requested as an issue. 
 
 <!-- version: 2023-04-07 [Do not delete this line, it is used for analytics that drive template improvements] -->
+
+## Chrome Extension
+
+### Manual Installation
+
+1. Clone the repository to your local machine.
+2. Open Chrome and navigate to `chrome://extensions/`.
+3. Enable "Developer mode" by toggling the switch in the top right corner.
+4. Click on the "Load unpacked" button and select the `extension` directory from the cloned repository.
+
+### Testing
+
+1. Open GitHub and navigate to a repository where you have multiple accounts.
+2. The extension should automatically switch to the correct account if the current account does not have access.
+3. If the extension does not work as expected, check the console for any error messages and ensure that the `background.js` and `content.js` files are correctly loaded.
