@@ -5,7 +5,8 @@ chrome.runtime.onInstalled.addListener(() => {
 function switchAccountIfNecessary(tabId) {
   chrome.scripting.executeScript({
     target: { tabId: tabId },
-    files: ['content.js']
+    files: ['content.js'],
+    world: 'MAIN'
   });
 }
 
