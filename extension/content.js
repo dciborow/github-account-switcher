@@ -7,7 +7,23 @@
     return window.location.hostname !== 'github.com';
   };
 
-  const selectCorrectAccount = () => {
+  const waitForElement = (selector, timeout = 5000) => {
+    return new Promise((resolve, reject) => {
+      const observer = new MutationObserver(() => {
+        if (document.querySelector(selector)) {
+          observer.disconnect();
+          resolve();
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+      setTimeout(() => {
+        observer.disconnect();
+        reject(new Error(`Timeout waiting for ${selector}`));
+      }, timeout);
+    });
+  };
+
+  const selectCorrectAccount = async () => {
     try {
       const accountPicker = detectAccountPicker();
       if (accountPicker) {
@@ -25,6 +41,7 @@
             }
           }
         }
+        await waitForElement('.switch-account-option');
         selectSwitchToAnotherAccountOption();
       }
     } catch (error) {
