@@ -28,7 +28,8 @@ jobs:
 
     - name: Comment on pull request with fixed formatting
       if: failure()
-      uses: reviewdog/action-suggester@v1
-      with:
-        tool_name: prettier
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        npx prettier --write .
+        gh pr comment ${{ github.event.pull_request.number }} --body "### Prettier Formatting Fixes\n\`\`\`\n$(npx prettier --write .)\n\`\`\`"
