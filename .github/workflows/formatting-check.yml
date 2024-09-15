@@ -1,0 +1,41 @@
+name: "Formatting Check"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  formatting-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Prettier
+      run: npx prettier --check .
+
+    - name: Comment on pull request with suggested formatting changes
+      if: failure()
+      uses: actions/github-script@v3
+      with:
+        script: |
+          const { execSync } = require('child_process');
+          const output = execSync('npx prettier --check .', { encoding: 'utf-8' });
+          const comment = `### Prettier Formatting Suggestions\n\`\`\`\n${output}\n\`\`\``;
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
