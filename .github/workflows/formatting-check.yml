@@ -1,7 +1,11 @@
 name: "Formatting Check"
 
 name: reviewdog
-on: [pull_request]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
   prettier:
     name: runner / prettier
