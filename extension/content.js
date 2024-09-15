@@ -19,16 +19,31 @@ function selectCorrectAccount() {
   }
 }
 
+const debounce = (func, delay) => {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
+
+const debouncedSelectCorrectAccount = debounce(selectCorrectAccount, 100);
+
 const observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    if (mutation.type === 'childList') {
-      selectCorrectAccount();
-    }
-  });
+  if (detectAccountPicker()) {
+    debouncedSelectCorrectAccount();
+    observer.disconnect(); // Stop observing once account is selected
+  }
 });
 
-observer.observe(document.body, { childList: true, subtree: true });
+const headerElement = document.querySelector('.Header-link');
+if (headerElement) {
+  observer.observe(headerElement, { childList: true, subtree: true });
+} else {
+  // Fall back to observing body if header is not found
+  observer.observe(document.body, { childList: true, subtree: true });
+}
 
 window.addEventListener('load', () => {
-  selectCorrectAccount();
+  debouncedSelectCorrectAccount();
 });
