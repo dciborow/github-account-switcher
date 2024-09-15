@@ -28,15 +28,4 @@ jobs:
 
     - name: Comment on pull request with fixed formatting
       if: failure()
-      uses: actions/github-script@v3
-      with:
-        script: |
-          const { execSync } = require('child_process');
-          const output = execSync('npx prettier --write .', { encoding: 'utf-8' });
-          const comment = `### Prettier Formatting Fixes\n\`\`\`\n${output}\n\`\`\``;
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: comment
-          });
+      run: gh pr comment ${{ github.event.pull_request.number }} --body "### Prettier Formatting Fixes\n\`\`\`\n$(npx prettier --write .)\n\`\`\`"
