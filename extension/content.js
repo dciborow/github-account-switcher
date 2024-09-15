@@ -46,4 +46,5 @@ if (headerElement) {
 
 window.addEventListener('load', () => {
   debouncedSelectCorrectAccount();
+  handleRepositoryTransition();
 });
