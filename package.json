@@ -1,0 +1,13 @@
+{
+  "name": "github-account-switcher",
+  "version": "1.0.0",
+  "description": "Automatically picks the correct account when accessing a GitHub repository.",
+  "main": "extension/background.js",
+  "scripts": {
+    "install": "npm install"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  }
+}
