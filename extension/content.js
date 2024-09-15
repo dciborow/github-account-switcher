@@ -19,7 +19,7 @@ function selectCorrectAccount() {
   }
 }
 
-const debounce = (func, delay) => {
+const debounceAccountSelector = (func, delay) => {
   let timeoutId;
   return (...args) => {
     clearTimeout(timeoutId);
@@ -27,7 +27,7 @@ const debounce = (func, delay) => {
   };
 };
 
-const debouncedSelectCorrectAccount = debounce(selectCorrectAccount, 100);
+const debouncedSelectCorrectAccount = debounceAccountSelector(selectCorrectAccount, 100);
 
 const observer = new MutationObserver((mutations) => {
   if (detectAccountPicker()) {
