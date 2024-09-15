@@ -34,6 +34,14 @@ function ensureAccountSwitch() {
         }
       }
     }
+    selectSwitchToAnotherAccountOption();
+  }
+}
+
+function selectSwitchToAnotherAccountOption() {
+  const switchAccountOption = document.querySelector('a[href*="switch-to-another-account"]');
+  if (switchAccountOption) {
+    switchAccountOption.click();
   }
 }
 

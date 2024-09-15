@@ -4,6 +4,10 @@
 
 GitHub Account Switcher is a Chrome extension that automatically selects the appropriate GitHub account when accessing a repository. It determines the correct account based on predefined rules or patterns, such as repository ownership or organization membership. This extension streamlines workflow for users with multiple GitHub accounts, eliminating the need for manual account switching.
 
+### New Feature: Automatically Select "Switch to another account" Option
+
+The extension now includes a feature that automatically selects the "Switch to another account" option when the "Signed in as" tab pops up. This ensures a seamless transition for users who need to switch accounts.
+
 ## Manual Installation
 
 1. Clone the repository to your local machine.
@@ -16,3 +20,4 @@ GitHub Account Switcher is a Chrome extension that automatically selects the app
 1. Open GitHub and navigate to a repository where you have multiple accounts.
 2. The extension should automatically switch to the correct account if the current account does not have access.
 3. If the extension does not work as expected, check the console for any error messages and ensure that the `background.js` and `content.js` files are correctly loaded.
+4. Verify that the extension automatically selects the "Switch to another account" option when the "Signed in as" tab pops up.

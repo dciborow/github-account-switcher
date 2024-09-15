@@ -25,9 +25,17 @@
             }
           }
         }
+        selectSwitchToAnotherAccountOption();
       }
     } catch (error) {
       console.error('Error selecting the correct account:', error);
+    }
+  };
+
+  const selectSwitchToAnotherAccountOption = () => {
+    const switchAccountOption = document.querySelector('a[href*="switch-to-another-account"]');
+    if (switchAccountOption) {
+      switchAccountOption.click();
     }
   };
 
