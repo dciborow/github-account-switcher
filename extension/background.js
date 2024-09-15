@@ -3,7 +3,10 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 function switchAccountIfNecessary(tabId) {
-  chrome.tabs.executeScript(tabId, { file: 'content.js' });
+  chrome.scripting.executeScript({
+    target: { tabId: tabId },
+    files: ['content.js']
+  });
 }
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
