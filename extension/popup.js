@@ -1,4 +1,4 @@
-document.getElementById('switchAccountButton').addEventListener('click', () => {
+(() => {
   const selectCorrectAccount = () => {
     try {
       const accountPicker = document.querySelector('.Header-link .dropdown-menu');
@@ -14,7 +14,13 @@ document.getElementById('switchAccountButton').addEventListener('click', () => {
     } catch (error) {
       console.error('Error selecting the correct account:', error);
     }
-  }
+  };
 
-  selectCorrectAccount();
-});
+  document.getElementById('switchAccountButton').addEventListener('click', () => {
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: selectCorrectAccount,
+      world: 'MAIN'
+    });
+  });
+})();
