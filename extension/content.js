@@ -48,5 +48,3 @@ window.addEventListener('load', () => {
   debouncedSelectCorrectAccount();
   handleRepositoryTransition();
 });
-
-export { detectAccountPicker, selectCorrectAccount, debounceAccountSelector };
